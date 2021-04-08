@@ -4,11 +4,26 @@
 ```C#
 public class PlayerController:MonObehaviour
 {
+    //创建公共变量seppd来控制力的大小，且可以在脚本面版直接修改seppd的参数。
+    public float speed;
+
+    private Rigidbody rb;
+
+    void Start ()
+    {
+         //创建变量持有刚体引用
+        rb = GetComponent<Rigidbody>();
+    }
+
     void FixedUpdate()
     {
         //获取水平轴和垂直轴
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
+
+        Vector3 movement = new Vector3(moveHorizontal,0.0f,moveVertical);
+
+        rb.AddForec(movement * speed);
     }
 }
 
